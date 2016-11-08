@@ -11,7 +11,7 @@ using namespace std;
 
 uint64_t keys[17] = { 0 }; //having the keys as global variables so they can be accessed anywhere
 
-//HERE ARE THE 8 S-BOXES USED IN THE 16 ROUNDS
+						   //HERE ARE THE 8 S-BOXES USED IN THE 16 ROUNDS
 const unsigned char S1[64] =
 {
 	0xE, 0x4, 0xD, 0x1, 0x2, 0xF, 0xB, 0x8, 0x3, 0xA, 0x6, 0xC, 0x5, 0x9, 0x0, 0x7,
@@ -90,7 +90,7 @@ void init(int argc, char *argv[])
 		errorWithMessage("Incorrect number of arguments.");
 	}
 
-	if (!(strcmp(argv[1],"-d") == 0 || strcmp(argv[1], "-D") == 0 || strcmp(argv[1], "-e") == 0 || strcmp(argv[1], "-E") == 0)) //action check
+	if (!(strcmp(argv[1], "-d") == 0 || strcmp(argv[1], "-D") == 0 || strcmp(argv[1], "-e") == 0 || strcmp(argv[1], "-E") == 0)) //action check
 	{
 		errorWithMessage("Incorrect action.");
 	}
@@ -103,8 +103,8 @@ void init(int argc, char *argv[])
 	if (strlen(argv[3]) != 3) errorWithMessage("Incorrect Mode"); //needs to be 3 bytes long
 
 	if (!(((argv[3][0] == 'e') || (argv[3][0] == 'E')) &&
-		  ((argv[3][1] == 'c') || (argv[3][1] == 'C')) &&
-		  ((argv[3][2] == 'b') || (argv[3][2] == 'B')))) //mode check
+		((argv[3][1] == 'c') || (argv[3][1] == 'C')) &&
+		((argv[3][2] == 'b') || (argv[3][2] == 'B')))) //mode check
 	{
 		errorWithMessage("Incorrect Mode");
 	}
@@ -178,61 +178,61 @@ uint64_t compressPermuteKey(uint64_t key)
 	//This part compresses the input key into Permuted 48 bit Key
 	uint64_t permKey = 0ULL;
 
-	if (key & (1ULL << 55)) permKey |= (1ULL << (48 - 5));	
-	if (key & (1ULL << 54)) permKey |= (1ULL << (48 - 24)); 
-	if (key & (1ULL << 53)) permKey |= (1ULL << (48 - 7)); 
-	if (key & (1ULL << 52)) permKey |= (1ULL << (48 - 16)); 
-	if (key & (1ULL << 51)) permKey |= (1ULL << (48 - 6)); 
-	if (key & (1ULL << 50)) permKey |= (1ULL << (48 - 10)); 
+	if (key & (1ULL << 55)) permKey |= (1ULL << (48 - 5));
+	if (key & (1ULL << 54)) permKey |= (1ULL << (48 - 24));
+	if (key & (1ULL << 53)) permKey |= (1ULL << (48 - 7));
+	if (key & (1ULL << 52)) permKey |= (1ULL << (48 - 16));
+	if (key & (1ULL << 51)) permKey |= (1ULL << (48 - 6));
+	if (key & (1ULL << 50)) permKey |= (1ULL << (48 - 10));
 	if (key & (1ULL << 49)) permKey |= (1ULL << (48 - 20)); //7
 	if (key & (1ULL << 48)) permKey |= (1ULL << (48 - 18));
 	//skip bit 9
-	if (key & (1ULL << 46)) permKey |= (1ULL << (48 - 12)); 
-	if (key & (1ULL << 45)) permKey |= (1ULL << (48 - 3)); 
-	if (key & (1ULL << 44)) permKey |= (1ULL << (48 - 15)); 
-	if (key & (1ULL << 43)) permKey |= (1ULL << (48 - 23)); 
+	if (key & (1ULL << 46)) permKey |= (1ULL << (48 - 12));
+	if (key & (1ULL << 45)) permKey |= (1ULL << (48 - 3));
+	if (key & (1ULL << 44)) permKey |= (1ULL << (48 - 15));
+	if (key & (1ULL << 43)) permKey |= (1ULL << (48 - 23));
 	if (key & (1ULL << 42)) permKey |= (1ULL << (48 - 1)); //14
-	if (key & (1ULL << 41)) permKey |= (1ULL << (48 - 9)); 
-	if (key & (1ULL << 40)) permKey |= (1ULL << (48 - 19)); 
-	if (key & (1ULL << 39)) permKey |= (1ULL << (48 - 2));	
+	if (key & (1ULL << 41)) permKey |= (1ULL << (48 - 9));
+	if (key & (1ULL << 40)) permKey |= (1ULL << (48 - 19));
+	if (key & (1ULL << 39)) permKey |= (1ULL << (48 - 2));
 	//bit 18 skip
-	if (key & (1ULL << 37)) permKey |= (1ULL << (48 - 14)); 
-	if (key & (1ULL << 36)) permKey |= (1ULL << (48 - 22)); 
+	if (key & (1ULL << 37)) permKey |= (1ULL << (48 - 14));
+	if (key & (1ULL << 36)) permKey |= (1ULL << (48 - 22));
 	if (key & (1ULL << 35)) permKey |= (1ULL << (48 - 11)); //21
-	//bit 22 skip
-	if (key & (1ULL << 33)) permKey |= (1ULL << (48 - 13)); 
-	if (key & (1ULL << 32)) permKey |= (1ULL << (48 - 4)); 
+															//bit 22 skip
+	if (key & (1ULL << 33)) permKey |= (1ULL << (48 - 13));
+	if (key & (1ULL << 32)) permKey |= (1ULL << (48 - 4));
 	//bit 25 skip
-	if (key & (1ULL << 30)) permKey |= (1ULL << (48 - 17)); 
-	if (key & (1ULL << 29)) permKey |= (1ULL << (48 - 21)); 
+	if (key & (1ULL << 30)) permKey |= (1ULL << (48 - 17));
+	if (key & (1ULL << 29)) permKey |= (1ULL << (48 - 21));
 	if (key & (1ULL << 28)) permKey |= (1ULL << (48 - 8)); //28
-	if (key & (1ULL << 27)) permKey |= (1ULL << (48 - 47)); 
-	if (key & (1ULL << 26)) permKey |= (1ULL << (48 - 31)); 
-	if (key & (1ULL << 25)) permKey |= (1ULL << (48 - 27)); 
-	if (key & (1ULL << 24)) permKey |= (1ULL << (48 - 48)); 
-	if (key & (1ULL << 23)) permKey |= (1ULL << (48 - 35));	
-	if (key & (1ULL << 22)) permKey |= (1ULL << (48 - 41)); 
+	if (key & (1ULL << 27)) permKey |= (1ULL << (48 - 47));
+	if (key & (1ULL << 26)) permKey |= (1ULL << (48 - 31));
+	if (key & (1ULL << 25)) permKey |= (1ULL << (48 - 27));
+	if (key & (1ULL << 24)) permKey |= (1ULL << (48 - 48));
+	if (key & (1ULL << 23)) permKey |= (1ULL << (48 - 35));
+	if (key & (1ULL << 22)) permKey |= (1ULL << (48 - 41));
 	//bit 35 skip											//35
-	if (key & (1ULL << 20)) permKey |= (1ULL << (48 - 46)); 
-	if (key & (1ULL << 19)) permKey |= (1ULL << (48 - 28)); 
+	if (key & (1ULL << 20)) permKey |= (1ULL << (48 - 46));
+	if (key & (1ULL << 19)) permKey |= (1ULL << (48 - 28));
 	//bit 38 skip
-	if (key & (1ULL << 17)) permKey |= (1ULL << (48 - 39)); 
-	if (key & (1ULL << 16)) permKey |= (1ULL << (48 - 32)); 
-	if (key & (1ULL << 15)) permKey |= (1ULL << (48 - 25)); 
+	if (key & (1ULL << 17)) permKey |= (1ULL << (48 - 39));
+	if (key & (1ULL << 16)) permKey |= (1ULL << (48 - 32));
+	if (key & (1ULL << 15)) permKey |= (1ULL << (48 - 25));
 	if (key & (1ULL << 14)) permKey |= (1ULL << (48 - 44)); //42
-	//bit 43 skip
-	if (key & (1ULL << 12)) permKey |= (1ULL << (48 - 37)); 
-	if (key & (1ULL << 11)) permKey |= (1ULL << (48 - 34)); 
-	if (key & (1ULL << 10)) permKey |= (1ULL << (48 - 43)); 
-	if (key & (1ULL << 9))  permKey |= (1ULL << (48 - 29)); 
-	if (key & (1ULL << 8))  permKey |= (1ULL << (48 - 36)); 
+															//bit 43 skip
+	if (key & (1ULL << 12)) permKey |= (1ULL << (48 - 37));
+	if (key & (1ULL << 11)) permKey |= (1ULL << (48 - 34));
+	if (key & (1ULL << 10)) permKey |= (1ULL << (48 - 43));
+	if (key & (1ULL << 9))  permKey |= (1ULL << (48 - 29));
+	if (key & (1ULL << 8))  permKey |= (1ULL << (48 - 36));
 	if (key & (1ULL << 7))  permKey |= (1ULL << (48 - 38));	//49
-	if (key & (1ULL << 6))  permKey |= (1ULL << (48 - 45));  
-	if (key & (1ULL << 5))  permKey |= (1ULL << (48 - 33)); 
-	if (key & (1ULL << 4))  permKey |= (1ULL << (48 - 26)); 
-	if (key & (1ULL << 3))  permKey |= (1ULL << (48 - 42)); 
+	if (key & (1ULL << 6))  permKey |= (1ULL << (48 - 45));
+	if (key & (1ULL << 5))  permKey |= (1ULL << (48 - 33));
+	if (key & (1ULL << 4))  permKey |= (1ULL << (48 - 26));
+	if (key & (1ULL << 3))  permKey |= (1ULL << (48 - 42));
 	//bit 54 skip
-	if (key & (1ULL << 1))  permKey |= (1ULL << (48 - 30)); 
+	if (key & (1ULL << 1))  permKey |= (1ULL << (48 - 30));
 	if (key & (1ULL << 0))  permKey |= (1ULL << (48 - 40)); //56
 
 	return permKey;
@@ -310,7 +310,7 @@ uint64_t permutation1(uint64_t y)
 	if (y & (1ULL << 0))  output |= (1ULL << (64 - 25)); //bit 64
 
 	return output;
-// end of initial permutation
+	// end of initial permutation
 }
 
 uint64_t finalPermutation(uint64_t y)
@@ -566,7 +566,6 @@ uint64_t runIt(uint64_t y, int roundKey)
 	if (right & (1ULL << 1))  permRight |= (1ULL << (32 - 15));
 	if (right & (1ULL << 0))  permRight |= (1ULL << (32 - 21));
 
-
 	right = (permRight ^ left);
 
 	y = (nextLeft << 32) | right;
@@ -589,13 +588,6 @@ int main(int argc, char *argv[])
 	char *inFileName = argv[4];
 	fstream inFile;
 
-	//inFile.open(inFileName, fstream::out | fstream::binary | fstream::trunc);
-	//char outer[9] = { 9 };
-	//uint64_t outty = 0x0123456789ABCDEF;
-	//convertToChar(outty, outer);
-	//inFile.write(outer, 8);
-	//inFile.close();
-
 	inFile.open(inFileName, fstream::in | fstream::binary);
 
 	if (!inFile) //infile check -> open
@@ -607,25 +599,25 @@ int main(int argc, char *argv[])
 	fstream outFile;
 	outFile.open(outFileName, fstream::out | fstream::binary | fstream::trunc);
 
-//should start by computing all 16 keys and store them in an array
-//if we are decoding, we need to run through the keys in reverse.
-//argv[2] is the key
-//When we compress and permutate the key from 64bits down to 56 scrambled bits,
-//We skip every 8th bit which is what does the compressing.
-	
+	//should start by computing all 16 keys and store them in an array
+	//if we are decoding, we need to run through the keys in reverse.
+	//argv[2] is the key
+	//When we compress and permutate the key from 64bits down to 56 scrambled bits,
+	//We skip every 8th bit which is what does the compressing.
+
 	uint64_t key = 0;
 
 	//If the key comes in as '{key value}' or "'{key value}'"
 	if (strlen(argv[2]) == 10)
 	{
 		key |= (((uint64_t)argv[2][1] << 56) & 0xFF00000000000000U)
-			|  (((uint64_t)argv[2][2] << 48) & 0x00FF000000000000U)
-			|  (((uint64_t)argv[2][3] << 40) & 0x0000FF0000000000U)
-			|  (((uint64_t)argv[2][4] << 32) & 0x000000FF00000000U)
-			|  (((uint64_t)argv[2][5] << 24) & 0x00000000FF000000U)
-			|  (((uint64_t)argv[2][6] << 16) & 0x0000000000FF0000U)
-			|  (((uint64_t)argv[2][7] << 8)  & 0x000000000000FF00U)
-			|  (((uint64_t)argv[2][8])		 & 0x00000000000000FFU);
+			| (((uint64_t)argv[2][2] << 48) & 0x00FF000000000000U)
+			| (((uint64_t)argv[2][3] << 40) & 0x0000FF0000000000U)
+			| (((uint64_t)argv[2][4] << 32) & 0x000000FF00000000U)
+			| (((uint64_t)argv[2][5] << 24) & 0x00000000FF000000U)
+			| (((uint64_t)argv[2][6] << 16) & 0x0000000000FF0000U)
+			| (((uint64_t)argv[2][7] << 8) & 0x000000000000FF00U)
+			| (((uint64_t)argv[2][8]) & 0x00000000000000FFU);
 	}
 	//if the key comes in as 16 Hex values
 	else {
@@ -855,7 +847,7 @@ int main(int argc, char *argv[])
 		else errorWithMessage("Not a valid char value.");
 
 		//now that we have them all in hex values we will put them into the key
-		key |=(((uint64_t)argv[2][0] << 60) & 0xF000000000000000)
+		key |= (((uint64_t)argv[2][0] << 60) & 0xF000000000000000)
 			| (((uint64_t)argv[2][1] << 56) & 0x0F00000000000000)
 			| (((uint64_t)argv[2][2] << 52) & 0x00F0000000000000)
 			| (((uint64_t)argv[2][3] << 48) & 0x000F000000000000)
@@ -865,13 +857,15 @@ int main(int argc, char *argv[])
 			| (((uint64_t)argv[2][7] << 32) & 0x0000000F00000000)
 			| (((uint64_t)argv[2][8] << 28) & 0x00000000F0000000)
 			| (((uint64_t)argv[2][9] << 24) & 0x000000000F000000)
-			| (((uint64_t)argv[2][10]<< 20) & 0x0000000000F00000)
-			| (((uint64_t)argv[2][11]<< 16) & 0x00000000000F0000)
-			| (((uint64_t)argv[2][12]<< 12) & 0x000000000000F000)
-			| (((uint64_t)argv[2][13]<< 8)  & 0x0000000000000F00)
-			| (((uint64_t)argv[2][14]<< 4)  & 0x00000000000000F0)
-			| (((uint64_t)argv[2][15])		& 0x000000000000000F);
+			| (((uint64_t)argv[2][10] << 20) & 0x0000000000F00000)
+			| (((uint64_t)argv[2][11] << 16) & 0x00000000000F0000)
+			| (((uint64_t)argv[2][12] << 12) & 0x000000000000F000)
+			| (((uint64_t)argv[2][13] << 8) & 0x0000000000000F00)
+			| (((uint64_t)argv[2][14] << 4) & 0x00000000000000F0)
+			| (((uint64_t)argv[2][15]) & 0x000000000000000F);
 	}
+
+	//Weak keys and checking against them
 	uint64_t weakKey1 = 0x0000000000000000;
 	uint64_t weakKey2 = 0xFFFFFFFFFFFFFFFF;
 	uint64_t weakKey3 = 0xFFFFFFFF00000000;
@@ -892,7 +886,7 @@ int main(int argc, char *argv[])
 	if (key & (1ULL << 59)) keys[0] |= (1ULL << (56 - 52)); //bit 5
 	if (key & (1ULL << 58)) keys[0] |= (1ULL << (56 - 44)); //bit 6
 	if (key & (1ULL << 57)) keys[0] |= (1ULL << (56 - 36)); //bit 7
-	//if (key & (1ULL << 56)) key |= (1ULL << (56 - 32)); //bit 8
+															//if (key & (1ULL << 56)) key |= (1ULL << (56 - 32)); //bit 8
 	if (key & (1ULL << 55)) keys[0] |= (1ULL << (56 - 7)); //bit 9
 	if (key & (1ULL << 54)) keys[0] |= (1ULL << (56 - 15)); //bit 10
 	if (key & (1ULL << 53)) keys[0] |= (1ULL << (56 - 23)); //bit 11
@@ -900,7 +894,7 @@ int main(int argc, char *argv[])
 	if (key & (1ULL << 51)) keys[0] |= (1ULL << (56 - 51)); //bit 13
 	if (key & (1ULL << 50)) keys[0] |= (1ULL << (56 - 43)); //bit 14
 	if (key & (1ULL << 49)) keys[0] |= (1ULL << (56 - 35)); //bit 15
-	//if (key & (1ULL << 48)) key |= (1ULL << (56 - 31)); //bit 16
+															//if (key & (1ULL << 48)) key |= (1ULL << (56 - 31)); //bit 16
 	if (key & (1ULL << 47)) keys[0] |= (1ULL << (56 - 6)); //bit 17
 	if (key & (1ULL << 46)) keys[0] |= (1ULL << (56 - 14)); //bit 18
 	if (key & (1ULL << 45)) keys[0] |= (1ULL << (56 - 22)); //bit 19
@@ -908,7 +902,7 @@ int main(int argc, char *argv[])
 	if (key & (1ULL << 43)) keys[0] |= (1ULL << (56 - 50)); //bit 21
 	if (key & (1ULL << 42)) keys[0] |= (1ULL << (56 - 42)); //bit 22
 	if (key & (1ULL << 41)) keys[0] |= (1ULL << (56 - 34)); //bit 23
-	//if (key & (1ULL << 40)) key |= (1ULL << (56 - 30)); //bit 24
+															//if (key & (1ULL << 40)) key |= (1ULL << (56 - 30)); //bit 24
 	if (key & (1ULL << 39)) keys[0] |= (1ULL << (56 - 5)); //bit 25
 	if (key & (1ULL << 38)) keys[0] |= (1ULL << (56 - 13)); //bit 26
 	if (key & (1ULL << 37)) keys[0] |= (1ULL << (56 - 21)); //bit 27
@@ -916,7 +910,7 @@ int main(int argc, char *argv[])
 	if (key & (1ULL << 35)) keys[0] |= (1ULL << (56 - 49)); //bit 29
 	if (key & (1ULL << 34)) keys[0] |= (1ULL << (56 - 41)); //bit 30
 	if (key & (1ULL << 33)) keys[0] |= (1ULL << (56 - 33)); //bit 31
-	//if (key & (1ULL << 32)) key |= (1ULL << (56 - 29)); //bit 32
+															//if (key & (1ULL << 32)) key |= (1ULL << (56 - 29)); //bit 32
 	if (key & (1ULL << 31)) keys[0] |= (1ULL << (56 - 4)); //bit 33
 	if (key & (1ULL << 30)) keys[0] |= (1ULL << (56 - 12)); //bit 34
 	if (key & (1ULL << 29)) keys[0] |= (1ULL << (56 - 20)); //bit 35
@@ -924,7 +918,7 @@ int main(int argc, char *argv[])
 	if (key & (1ULL << 27)) keys[0] |= (1ULL << (56 - 48)); //bit 37
 	if (key & (1ULL << 26)) keys[0] |= (1ULL << (56 - 40)); //bit 38
 	if (key & (1ULL << 25)) keys[0] |= (1ULL << (56 - 32)); //bit 39
-	//if (key & (1ULL << 24)) key |= (1ULL << (56 - 28)); //bit 40
+															//if (key & (1ULL << 24)) key |= (1ULL << (56 - 28)); //bit 40
 	if (key & (1ULL << 23)) keys[0] |= (1ULL << (56 - 3)); //bit 41
 	if (key & (1ULL << 22)) keys[0] |= (1ULL << (56 - 11)); //bit 42
 	if (key & (1ULL << 21)) keys[0] |= (1ULL << (56 - 19)); //bit 43
@@ -932,7 +926,7 @@ int main(int argc, char *argv[])
 	if (key & (1ULL << 19)) keys[0] |= (1ULL << (56 - 47)); //bit 45
 	if (key & (1ULL << 18)) keys[0] |= (1ULL << (56 - 39)); //bit 46
 	if (key & (1ULL << 17)) keys[0] |= (1ULL << (56 - 31)); //bit 47
-	//if (key & (1ULL << 16)) key |= (1ULL << (56 - 27)); //bit 48
+															//if (key & (1ULL << 16)) key |= (1ULL << (56 - 27)); //bit 48
 	if (key & (1ULL << 15)) keys[0] |= (1ULL << (56 - 2)); //bit 49
 	if (key & (1ULL << 14)) keys[0] |= (1ULL << (56 - 10)); //bit 50
 	if (key & (1ULL << 13)) keys[0] |= (1ULL << (56 - 18)); //bit 51
@@ -940,7 +934,7 @@ int main(int argc, char *argv[])
 	if (key & (1ULL << 11)) keys[0] |= (1ULL << (56 - 46)); //bit 53
 	if (key & (1ULL << 10)) keys[0] |= (1ULL << (56 - 38)); //bit 54
 	if (key & (1ULL << 9))  keys[0] |= (1ULL << (56 - 30)); //bit 55
-	//if (key & (1ULL << 8))  key |= (1ULL << (56 - 26)); //bit 56
+															//if (key & (1ULL << 8))  key |= (1ULL << (56 - 26)); //bit 56
 	if (key & (1ULL << 7))  keys[0] |= (1ULL << (56 - 1)); //bit 57
 	if (key & (1ULL << 6))  keys[0] |= (1ULL << (56 - 9));  //bit 58
 	if (key & (1ULL << 5))  keys[0] |= (1ULL << (56 - 17)); //bit 59
@@ -948,7 +942,7 @@ int main(int argc, char *argv[])
 	if (key & (1ULL << 3))  keys[0] |= (1ULL << (56 - 45)); //bit 61
 	if (key & (1ULL << 2))  keys[0] |= (1ULL << (56 - 37)); //bit 62
 	if (key & (1ULL << 1))  keys[0] |= (1ULL << (56 - 29)); //bit 63
-	//if (key & (1ULL << 0))  key |= (1ULL << (56 - 25)); //bit 64
+															//if (key & (1ULL << 0))  key |= (1ULL << (56 - 25)); //bit 64
 
 	//We want to compute the 16 keys that we will use for encrypting/decrypting
 	//ROUNDS 1,2,9,16 rotate 1 bit
@@ -999,7 +993,7 @@ int main(int argc, char *argv[])
 	inFile.seekg(0, ios::end); //put pointer at end of file
 	fileSize = (uint32_t)inFile.tellg() - fileSize; //use the difference for file size
 	inFile.seekg(0, ios::beg);//move the pointer back to the beggining of the file
-	
+
 	if (fileSize % 8 != 0)
 	{
 		//we will need to pad bytes on if the length is not a perfect multiple of 8
@@ -1016,12 +1010,12 @@ int main(int argc, char *argv[])
 		uint64_t randomGarb = (uint16_t)rand();		//casting to 16 bits so the max is 
 		randomGarb = randomGarb * (uint16_t)rand(); //less than 32 bits after the mul
 		randomGarb = (randomGarb << 32); //clearing out the space for the filesize
-		randomGarb += fileSize;
+		randomGarb += (uint64_t)fileSize;
 
 		//now we have the first 8bytes of the output file that we need to encrypt
 		// initial permutation
 		randomGarb = permutation1(randomGarb);
-		
+
 		//The 16 Feistel rounds
 		randomGarb = runIt(randomGarb, 1);
 		randomGarb = runIt(randomGarb, 2);
@@ -1062,14 +1056,14 @@ int main(int argc, char *argv[])
 			bytesRead += 8;
 
 			uint64_t y = 0;
-			y  |= (((uint64_t)in[0] << 56) & 0xFF00000000000000)
+			y |= (((uint64_t)in[0] << 56) & 0xFF00000000000000)
 				| (((uint64_t)in[1] << 48) & 0x00FF000000000000)
 				| (((uint64_t)in[2] << 40) & 0x0000FF0000000000)
 				| (((uint64_t)in[3] << 32) & 0x000000FF00000000)
 				| (((uint64_t)in[4] << 24) & 0x00000000FF000000)
 				| (((uint64_t)in[5] << 16) & 0x0000000000FF0000)
-				| (((uint64_t)in[6] << 8)  & 0x000000000000FF00)
-				| (((uint64_t)in[7])       & 0x00000000000000FF);
+				| (((uint64_t)in[6] << 8) & 0x000000000000FF00)
+				| (((uint64_t)in[7]) & 0x00000000000000FF);
 
 			y = permutation1(y);
 
@@ -1091,7 +1085,7 @@ int main(int argc, char *argv[])
 			y = runIt(y, 15);
 			y = runIt(y, 16);
 
-			uint64_t right = y & 0x00000000FFFFFFFF;
+			right = y & 0x00000000FFFFFFFF;
 
 			//the last swap after the 16th round
 			y = (y >> 32) | (right << 32);
@@ -1105,21 +1099,21 @@ int main(int argc, char *argv[])
 		if ((fileSize - bytesRead) > 0)
 		{
 			int bytesToFill = (fileSize % 8);
-			inFile.read(in, fileSize-bytesRead);
+			inFile.read(in, fileSize - bytesRead);
 			while (bytesToFill < 8)
 			{
 				in[bytesToFill++] = (rand() % 256); //trying to get a random character to finish out the last string
 			}
 
 			uint64_t y = 0;
-			y  |= (((uint64_t)in[0] << 56) & 0xFF00000000000000)
+			y |= (((uint64_t)in[0] << 56) & 0xFF00000000000000)
 				| (((uint64_t)in[1] << 48) & 0x00FF000000000000)
 				| (((uint64_t)in[2] << 40) & 0x0000FF0000000000)
 				| (((uint64_t)in[3] << 32) & 0x000000FF00000000)
 				| (((uint64_t)in[4] << 24) & 0x00000000FF000000)
 				| (((uint64_t)in[5] << 16) & 0x0000000000FF0000)
-				| (((uint64_t)in[6] << 8)  & 0x000000000000FF00)
-				| (((uint64_t)in[7])	   & 0x00000000000000FF);
+				| (((uint64_t)in[6] << 8) & 0x000000000000FF00)
+				| (((uint64_t)in[7]) & 0x00000000000000FF);
 
 			y = permutation1(y);
 
@@ -1161,6 +1155,7 @@ int main(int argc, char *argv[])
 		inFile.read(in, 8);
 		bytesRead += 8;
 
+		//convert the characters to a uint64_t
 		uint64_t y = 0;
 		y |= (((uint64_t)in[0] << 56) & 0xFF00000000000000)
 			| (((uint64_t)in[1] << 48) & 0x00FF000000000000)
@@ -1199,55 +1194,12 @@ int main(int argc, char *argv[])
 
 		y = finalPermutation(y);
 
-		uint64_t realFileSize = y & 0x00000000FFFFFFFF;
+		uint64_t realFileSize = y & 0x000000007FFFFFFF;
 
-		while (fileSize - bytesRead > 8)
-		{
-			inFile.read(in, 8);
-			bytesRead += 8;
+		cout << realFileSize << " is the decrypted filesize" << endl;
 
-			uint64_t y = 0;
-			y |= (((uint64_t)in[0] << 56)  & 0xFF00000000000000)
-				| (((uint64_t)in[1] << 48) & 0x00FF000000000000)
-				| (((uint64_t)in[2] << 40) & 0x0000FF0000000000)
-				| (((uint64_t)in[3] << 32) & 0x000000FF00000000)
-				| (((uint64_t)in[4] << 24) & 0x00000000FF000000)
-				| (((uint64_t)in[5] << 16) & 0x0000000000FF0000)
-				| (((uint64_t)in[6] << 8)  & 0x000000000000FF00)
-				| (((uint64_t)in[7])	   & 0x00000000000000FF);
-
-			y = permutation1(y);
-
-			//The 16 Feistel rounds
-			y = runIt(y, 16);
-			y = runIt(y, 15);
-			y = runIt(y, 14);
-			y = runIt(y, 13);
-			y = runIt(y, 12);
-			y = runIt(y, 11);
-			y = runIt(y, 10);
-			y = runIt(y, 9);
-			y = runIt(y, 8);
-			y = runIt(y, 7);
-			y = runIt(y, 6);
-			y = runIt(y, 5);
-			y = runIt(y, 4);
-			y = runIt(y, 3);
-			y = runIt(y, 2);
-			y = runIt(y, 1);
-
-			uint64_t right = y & 0x00000000FFFFFFFF;
-
-			//the last swap after the last round
-			y = (y >> 32) | (right << 32);
-
-			y = finalPermutation(y);
-			
-			convertToChar(y, a);
-			outFile.write(a, 8);
-			outFile.flush();
-		}
-		if (realFileSize % 8 != 0) //we still have another block to read in with only partially important data
+		//Here we have a file that was originally 0-8 bytes long
+		if (fileSize == 16)
 		{
 			inFile.read(in, 8);
 			bytesRead += 8;
@@ -1290,11 +1242,107 @@ int main(int argc, char *argv[])
 			y = finalPermutation(y);
 
 			convertToChar(y, a);
-			outFile.write(a, (realFileSize % 8));
+
+			outFile.write(a, realFileSize);
 			outFile.flush();
 		}
+		else
+		{
+			while (((int32_t)fileSize - bytesRead - (realFileSize%8)) >= 8)
+			{
+				inFile.read(in, 8);
+				bytesRead += 8;
+
+				uint64_t y = 0;
+				y |= (((uint64_t)in[0] << 56) & 0xFF00000000000000)
+					| (((uint64_t)in[1] << 48) & 0x00FF000000000000)
+					| (((uint64_t)in[2] << 40) & 0x0000FF0000000000)
+					| (((uint64_t)in[3] << 32) & 0x000000FF00000000)
+					| (((uint64_t)in[4] << 24) & 0x00000000FF000000)
+					| (((uint64_t)in[5] << 16) & 0x0000000000FF0000)
+					| (((uint64_t)in[6] << 8) & 0x000000000000FF00)
+					| (((uint64_t)in[7]) & 0x00000000000000FF);
+
+				y = permutation1(y);
+
+				//The 16 Feistel rounds
+				y = runIt(y, 16);
+				y = runIt(y, 15);
+				y = runIt(y, 14);
+				y = runIt(y, 13);
+				y = runIt(y, 12);
+				y = runIt(y, 11);
+				y = runIt(y, 10);
+				y = runIt(y, 9);
+				y = runIt(y, 8);
+				y = runIt(y, 7);
+				y = runIt(y, 6);
+				y = runIt(y, 5);
+				y = runIt(y, 4);
+				y = runIt(y, 3);
+				y = runIt(y, 2);
+				y = runIt(y, 1);
+
+				uint64_t right = y & 0x00000000FFFFFFFF;
+
+				//the last swap after the last round
+				y = (y >> 32) | (right << 32);
+
+				y = finalPermutation(y);
+
+				convertToChar(y, a);
+				outFile.write(a, 8);
+				outFile.flush();
+			}
+			if (realFileSize % 8 != 0) //we still have another block to read in with only partially important data
+			{
+				inFile.read(in, 8);
+				bytesRead += 8;
+
+				uint64_t y = 0;
+				y |= (((uint64_t)in[0] << 56) & 0xFF00000000000000)
+					| (((uint64_t)in[1] << 48) & 0x00FF000000000000)
+					| (((uint64_t)in[2] << 40) & 0x0000FF0000000000)
+					| (((uint64_t)in[3] << 32) & 0x000000FF00000000)
+					| (((uint64_t)in[4] << 24) & 0x00000000FF000000)
+					| (((uint64_t)in[5] << 16) & 0x0000000000FF0000)
+					| (((uint64_t)in[6] << 8) & 0x000000000000FF00)
+					| (((uint64_t)in[7]) & 0x00000000000000FF);
+
+				y = permutation1(y);
+
+				//The 16 Feistel rounds
+				y = runIt(y, 16);
+				y = runIt(y, 15);
+				y = runIt(y, 14);
+				y = runIt(y, 13);
+				y = runIt(y, 12);
+				y = runIt(y, 11);
+				y = runIt(y, 10);
+				y = runIt(y, 9);
+				y = runIt(y, 8);
+				y = runIt(y, 7);
+				y = runIt(y, 6);
+				y = runIt(y, 5);
+				y = runIt(y, 4);
+				y = runIt(y, 3);
+				y = runIt(y, 2);
+				y = runIt(y, 1);
+
+				uint64_t right = y & 0x00000000FFFFFFFF;
+
+				//the last swap after the last round
+				y = (y >> 32) | (right << 32);
+
+				y = finalPermutation(y);
+
+				convertToChar(y, a);
+				outFile.write(a, (realFileSize%8));
+				outFile.flush();
+			}
+		}
 	}
-	
+
 	inFile.close();
 	outFile.close();
 
